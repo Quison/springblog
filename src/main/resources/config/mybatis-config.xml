@@ -45,7 +45,7 @@
 	</typeAliases>
 	
 	<mappers>
-		<mapper resource="mapper/PostsMapper.xml" />
+		<mapper resource="mapper/PostMapper.xml" />
 	</mappers>
 
 </configuration>

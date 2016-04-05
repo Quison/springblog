@@ -9,15 +9,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.moguichun.blog.service.PostsService;
-import com.moguichun.blog.service.impl.PostsServiceImpl;
+import com.moguichun.blog.service.PostService;
+import com.moguichun.blog.service.impl.PostServiceImpl;
 
 @Controller
 @EnableAutoConfiguration
 public class BlogController {
 	
 	@Autowired
-	private PostsService postsService;
+	@Qualifier("PostService")
+	private PostService postService;
 	
 	@ResponseBody
 	@RequestMapping("/")
@@ -28,7 +29,7 @@ public class BlogController {
 	@RequestMapping("/post/{id}")
 	public String post(@PathVariable("id") int id, Model model) {
 		
-		model.addAttribute("post", postsService.getPostById(id));
+		model.addAttribute("post", postService.getPostById(id));
 		
 		return "post";
 	}

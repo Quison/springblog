@@ -5,10 +5,10 @@ import org.springframework.stereotype.Service;
 
 import com.moguichun.blog.dao.PostDao;
 import com.moguichun.blog.model.Post;
-import com.moguichun.blog.service.PostsService;
+import com.moguichun.blog.service.PostService;
 
-@Service
-public class PostsServiceImpl implements PostsService {
+@Service("PostService")
+public class PostServiceImpl implements PostService {
 
 	@Autowired
 	private PostDao postDao;

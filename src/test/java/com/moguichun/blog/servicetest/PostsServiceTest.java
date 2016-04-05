@@ -11,7 +11,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.moguichun.blog.Application;
 import com.moguichun.blog.model.Post;
-import com.moguichun.blog.service.impl.PostsServiceImpl;
+import com.moguichun.blog.service.impl.PostServiceImpl;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
@@ -19,7 +19,7 @@ import com.moguichun.blog.service.impl.PostsServiceImpl;
 public class PostsServiceTest {
 	
 	@Autowired
-	private PostsServiceImpl postsService;
+	private PostServiceImpl postsService;
 	
 	@Test
 	public void testFindPostById() {
