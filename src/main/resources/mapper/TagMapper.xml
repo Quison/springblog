@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.moguichun.blog.dao.TagDao">
+
+	<select id="findAllTag" resultType="Tag">
+		SELECT * FROM tag
+	</select>
+	
+	<select id="findTagById" parameterType="Integer" resultType="Tag" >
+		SELECT * FROM tag WHERE id = #{id}
+	</select>
+	
+	<insert id="insertTag" parameterType="Tag" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tag(id, tag_name, create_date)
+		VALUES(#{id}, #{tagName}, now())
+	</insert>
+	
+	<update id="updateTag" parameterType="Tag">
+		UPDATE tag
+		<set>
+			<if test="tagName != null">
+				tag_name = #{tagName, jdbcType=VARCHAR},
+			</if>
+				update_date = now()
+		</set>
+		WHERE id = #{id, jdbcType=INTEGER}
+	</update>
+
+</mapper>

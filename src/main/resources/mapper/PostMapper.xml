@@ -6,12 +6,33 @@
 
 <mapper namespace="com.moguichun.blog.dao.PostDao">
 
-	<select id="queryAllPost" resultType="Post">
+	<select id="findAllPost" resultType="Post">
 		SELECT * FROM post
 	</select>
-	
+
 	<select id="findPostById" resultType="Post" parameterType="Integer">
 		SELECT * FROM post WHERE id = #{id}
 	</select>
+
+	<insert id="insertPost" parameterType="Post" useGeneratedKeys="true" keyProperty="id">
+
+		INSERT INTO post(id, title, content, create_date)
+		VALUES(#{id}, #{title}, #{content}, now())
+
+	</insert>
+
+	<update id="updatePost" parameterType="Post">
+		UPDATE post
+		<set>
+			<if test="title != null">
+				title = #{title, jdbcType=VARCHAR},
+			</if>
+			<if test="content != null">
+				content = #{content, jdbcType=VARCHAR},
+			</if>
+			update_date = now()
+		</set>
+		WHERE id = #{id, jdbcType=INTEGER}
+	</update>
 
 </mapper>

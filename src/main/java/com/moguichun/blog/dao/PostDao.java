@@ -9,8 +9,12 @@ import com.moguichun.blog.model.Post;
 @Repository
 public interface PostDao {
 	
-	public List<Post> queryAllPost();
+	public List<Post> findAllPost();
 	
 	public Post findPostById(Integer id);
+	
+	public int insertPost(Post post);
+	
+	public void updatePost(Post post);
 
 }
