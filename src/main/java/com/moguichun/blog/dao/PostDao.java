@@ -16,5 +16,7 @@ public interface PostDao {
 	public int insertPost(Post post);
 	
 	public void updatePost(Post post);
+	
+	public Integer queryPostCount();
 
 }

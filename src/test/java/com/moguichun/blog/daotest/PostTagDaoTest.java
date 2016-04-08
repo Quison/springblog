@@ -19,7 +19,7 @@ import com.moguichun.blog.model.PostTag;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-public class PostTagTest {
+public class PostTagDaoTest {
 	
 	@Autowired
 	private PostTagDao postTagDao;

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.verification.VerificationAfterDelay;
 import org.pegdown.PegDownProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -19,7 +20,7 @@ import com.moguichun.blog.model.Post;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-public class PostTest {
+public class PostDaoTest {
 	
 	@Autowired
 	private PostDao postDao;
@@ -55,5 +56,12 @@ public class PostTest {
 		post.setTitle("更改测试标题！");
 		post.setContent("更改测试内容！");
 		postDao.updatePost(post);
+	}
+	
+	@Test
+	public void testQueryPostCount() {
+		int count = postDao.queryPostCount();
+		System.out.println("count =========== " + count);
+		assertTrue((count > 0) );
 	}
 }

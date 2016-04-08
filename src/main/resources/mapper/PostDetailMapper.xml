@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.moguichun.blog.dao.PostDetailDao">
+
+	<select id="getSomePostDetail" resultMap="PostDetailMap">
+		SELECT id, title, content, create_date, update_date FROM post LIMIT #{0},#{1}
+	</select>
+	
+	<select id="getPostDetailById" parameterType="Integer" resultMap="PostDetailMap">
+		SELECT * FROM post WHERE id = #{postId}
+	</select>
+	
+	<resultMap type="PostDetailVo" id="PostDetailMap">
+		<id property="id" column="id"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="createDate" column="create_date"/>
+		<result property="updateDate" column="update_date"/>
+		<collection property="tags" ofType="String" column="id" select="findTagsNameOfPost"></collection>
+		<collection property="authors" ofType="String" column="id" select="findAuthorsNameOfPost"></collection>
+	</resultMap>
+	
+	<select id="findTagsNameOfPost" parameterType="Integer"  resultType="String">
+		SELECT DISTINCT tag_name FROM post_tag, tag 
+		WHERE post_tag.post_id = #{id} AND post_tag.tag_id = tag.id
+	</select>
+	
+	<select id="findAuthorsNameOfPost" parameterType="Integer" resultType="String">
+		SELECT DISTINCT username FROM post_user, user 
+		WHERE post_user.post_id = #{id} AND post_user.user_id = user.id
+	</select>
+
+</mapper>

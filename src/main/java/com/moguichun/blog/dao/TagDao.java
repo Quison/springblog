@@ -9,6 +9,8 @@ public interface TagDao {
 	public List<Tag> findAllTag();
 
 	public Tag findTagById(Integer id);
+	
+	public Integer findTagIdByTagName(String tagName);
 
 	public Integer insertTag(Tag tag);
 

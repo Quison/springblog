@@ -14,6 +14,10 @@
 		SELECT * FROM tag WHERE id = #{id}
 	</select>
 	
+	<select id="findTagIdByTagName" parameterType="String" resultType="Integer">
+		SELECT IFNULL((SELECT id FROM tag WHERE tag_name = #{tagName}),0)
+	</select>
+	
 	<insert id="insertTag" parameterType="Tag" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO tag(id, tag_name, create_date)
 		VALUES(#{id}, #{tagName}, now())

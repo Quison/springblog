@@ -34,5 +34,9 @@
 		</set>
 		WHERE id = #{id, jdbcType=INTEGER}
 	</update>
+	
+	<select id="queryPostCount" resultType="Integer">
+		SELECT COUNT(*) FROM post
+	</select>
 
 </mapper>

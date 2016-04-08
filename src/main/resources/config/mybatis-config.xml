@@ -50,6 +50,7 @@
 		<mapper resource="mapper/TagMapper.xml" />
 		<mapper resource="mapper/PostTagMapper.xml" />
 		<mapper resource="mapper/PostUserMapper.xml" />
+		<mapper resource="mapper/PostDetailMapper.xml" />
 	</mappers>
 
 </configuration>

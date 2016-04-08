@@ -18,7 +18,7 @@ import com.moguichun.blog.model.PostUser;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-public class PostUserTest {
+public class PostUserDaoTest {
 	
 	@Autowired
 	private PostUserDao postUserDao;
