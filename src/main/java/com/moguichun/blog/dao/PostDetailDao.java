@@ -7,7 +7,7 @@ import com.moguichun.blog.model.PostDetailVo;
 
 public interface PostDetailDao {
 	
-	public List<PostDetailVo> getSomePostDetail(Integer offset, Integer amount);
+	public List<PostDetailVo> getPostDetailByPaging(Integer start, Integer offset);
 	
 	public PostDetailVo getPostDetailById(Integer postId);
 

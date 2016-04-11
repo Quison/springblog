@@ -25,8 +25,8 @@ public class PostDetailDaoTest {
 	private PostDetailDao postDetailDao;
 	
 	@Test
-	public void testGetSomePostInfo() {
-		List<PostDetailVo> postDetailVos = postDetailDao.getSomePostDetail(2, 5);
+	public void testGetPostInfoByPaging() {
+		List<PostDetailVo> postDetailVos = postDetailDao.getPostDetailByPaging(2, 5);
 		System.out.println(postDetailVos);
 		assertNotNull(postDetailVos);
 	}

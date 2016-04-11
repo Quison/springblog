@@ -1,0 +1,28 @@
+body {
+    margin-top: 70px;
+}
+p {
+    text-indent: 2em;
+}
+.sidebar-about-me {
+    background-color: #dfddfd;
+    padding: 10px;
+}
+.sidebar-tags {
+    margin-top: 10px;
+    background-color: #dfedfe;
+    padding: 10px;
+}
+.sidebar-archives {
+    margin-top: 10px;
+    background-color: #afedfe;
+    padding: 10px;
+}
+.blog-footer {
+    margin-top: 15px;
+    padding: 40px 0;
+    color: #999;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-top: 1px solid #e5e5e5;
+}

@@ -6,7 +6,7 @@
 
 <mapper namespace="com.moguichun.blog.dao.PostDetailDao">
 
-	<select id="getSomePostDetail" resultMap="PostDetailMap">
+	<select id="getPostDetailByPaging" resultMap="PostDetailMap">
 		SELECT id, title, content, create_date, update_date FROM post LIMIT #{0},#{1}
 	</select>
 	

@@ -15,12 +15,15 @@ import com.moguichun.blog.model.PostDetailVo;
 import com.moguichun.blog.service.PostService;
 
 @Service("PostService")
-@Transactional
 public class PostServiceImpl implements PostService {
 
 	@Autowired
 	private TagDao tagDao;
+	
+	@Autowired
 	private PostDao postDao;
+	
+	@Autowired
 	private PostDetailDao postDetailDao;
 
 	@Override
@@ -29,16 +32,26 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
+	public List<PostDetailVo> getPostDetailByPaging(Integer start, Integer offset) {
+		List<PostDetailVo> postDetailVos = postDetailDao.getPostDetailByPaging(start, offset);
+		if (postDetailVos == null || postDetailVos.size() == 0) {
+			return null;
+		}
+		return postDetailVos;
+	}
+	
+
+	@Override
 	public Integer createPost(PostCreateInfo postCreateInfo) {
 		Post post = new Post();
 		post.setTitle(postCreateInfo.getTitle());
 		post.setContent(postCreateInfo.getContent());
 		postDao.insertPost(post);
 		int postId = post.getId();
-		
+
 		// 遍历所有标签，标签已存在，那么直接插入past_tag表中，否则生成在插入
 		List<String> tagNames = postCreateInfo.getTags();
-		for(String tagName : tagNames) {
+		for (String tagName : tagNames) {
 			int tagId = tagDao.findTagIdByTagName(tagName);
 			if (tagId != 0) {
 				// 直接插入
@@ -46,8 +59,13 @@ public class PostServiceImpl implements PostService {
 				// 创建在插入
 			}
 		}
-		
+
 		return postId;
+	}
+
+	@Override
+	public Integer getPostCount() {
+		return postDao.queryPostCount();
 	}
 
 }

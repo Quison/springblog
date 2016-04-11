@@ -1,5 +1,7 @@
 package com.moguichun.blog.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -9,9 +11,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.moguichun.blog.model.PostDetailVo;
 import com.moguichun.blog.service.PostService;
+
+import groovy.lang.MetaClassImpl.Index;
 
 @Controller
 @EnableAutoConfiguration
@@ -20,6 +25,16 @@ public class PostController {
 	@Autowired
 	@Qualifier("PostService")
 	private PostService postService;
+	
+	@RequestMapping(value="/")
+	public String index(Model model) {
+		// 首页显示5篇文章
+		List<PostDetailVo> postDetailVos = postService.getPostDetailByPaging(0, 3);
+		int postCount = postService.getPostCount();
+		model.addAttribute("postDetailVos",postDetailVos);
+		model.addAttribute("postCount", postCount);
+		return "home/index";
+	}
 
 	/**
 	 * 
@@ -32,11 +47,13 @@ public class PostController {
 	 * @throws
 	 */
 	@RequestMapping(value="/post/show/{id}", method=RequestMethod.GET)
+	@ResponseBody
 	public String showPost(@PathVariable("id") int id, Model model) {
 		PostDetailVo postDetailVo = postService.getPostDetailById(id);
 		model.addAttribute("postDetailVo", postDetailVo);
 		return "post";
 	}
+
 	
 	/**
 	 * 
