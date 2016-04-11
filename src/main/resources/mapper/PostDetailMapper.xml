@@ -7,7 +7,7 @@
 <mapper namespace="com.moguichun.blog.dao.PostDetailDao">
 
 	<select id="getPostDetailByPaging" resultMap="PostDetailMap">
-		SELECT id, title, content, create_date, update_date FROM post LIMIT #{0},#{1}
+		SELECT id, title, render_content, create_date, update_date FROM post LIMIT #{0},#{1}
 	</select>
 	
 	<select id="getPostDetailById" parameterType="Integer" resultMap="PostDetailMap">
@@ -17,7 +17,7 @@
 	<resultMap type="PostDetailVo" id="PostDetailMap">
 		<id property="id" column="id"/>
 		<result property="title" column="title"/>
-		<result property="content" column="content"/>
+		<result property="renderContent" column="render_content"/>
 		<result property="createDate" column="create_date"/>
 		<result property="updateDate" column="update_date"/>
 		<collection property="tags" ofType="String" column="id" select="findTagsNameOfPost"></collection>

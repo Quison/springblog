@@ -16,8 +16,8 @@
 
 	<insert id="insertPost" parameterType="Post" useGeneratedKeys="true" keyProperty="id">
 
-		INSERT INTO post(id, title, content, create_date)
-		VALUES(#{id}, #{title}, #{content}, now())
+		INSERT INTO post(id, title, content, render_content, create_date)
+		VALUES(#{id}, #{title}, #{content}, #{renderContent}, now())
 
 	</insert>
 
@@ -29,6 +29,9 @@
 			</if>
 			<if test="content != null">
 				content = #{content, jdbcType=VARCHAR},
+			</if>
+			<if test="renderContent != null">
+				render_content = #{renderContent, jdbcType=VARCHAR},
 			</if>
 			update_date = now()
 		</set>

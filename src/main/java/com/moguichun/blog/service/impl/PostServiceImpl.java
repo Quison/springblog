@@ -2,16 +2,25 @@ package com.moguichun.blog.service.impl;
 
 import java.util.List;
 
+import org.pegdown.Extensions;
+import org.pegdown.PegDownProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.moguichun.blog.dao.PostDao;
 import com.moguichun.blog.dao.PostDetailDao;
+import com.moguichun.blog.dao.PostTagDao;
+import com.moguichun.blog.dao.PostUserDao;
 import com.moguichun.blog.dao.TagDao;
+import com.moguichun.blog.dao.UserDao;
 import com.moguichun.blog.model.Post;
 import com.moguichun.blog.model.PostCreateInfo;
 import com.moguichun.blog.model.PostDetailVo;
+import com.moguichun.blog.model.PostTag;
+import com.moguichun.blog.model.PostUser;
+import com.moguichun.blog.model.Tag;
+import com.moguichun.blog.model.User;
 import com.moguichun.blog.service.PostService;
 
 @Service("PostService")
@@ -25,6 +34,15 @@ public class PostServiceImpl implements PostService {
 	
 	@Autowired
 	private PostDetailDao postDetailDao;
+	
+	@Autowired
+	private PostTagDao postTagDao;
+	
+	@Autowired
+	private UserDao userDao;
+	
+	@Autowired
+	private PostUserDao postUserDao;
 
 	@Override
 	public PostDetailVo getPostDetailById(Integer id) {
@@ -46,6 +64,12 @@ public class PostServiceImpl implements PostService {
 		Post post = new Post();
 		post.setTitle(postCreateInfo.getTitle());
 		post.setContent(postCreateInfo.getContent());
+		
+		// 渲染
+		PegDownProcessor pegDownProcessor = new PegDownProcessor(Extensions.ALL);
+		String renderContent = pegDownProcessor.markdownToHtml(postCreateInfo.getContent());
+		post.setRenderContent(renderContent);
+		
 		postDao.insertPost(post);
 		int postId = post.getId();
 
@@ -53,13 +77,30 @@ public class PostServiceImpl implements PostService {
 		List<String> tagNames = postCreateInfo.getTags();
 		for (String tagName : tagNames) {
 			int tagId = tagDao.findTagIdByTagName(tagName);
-			if (tagId != 0) {
-				// 直接插入
-			} else {
-				// 创建在插入
+			if (tagId == 0) {
+				Tag tag = new Tag();
+				tag.setTagName(tagName);
+				tagDao.insertTag(tag);
+				tagId = tag.getId();
 			}
+			PostTag postTag = new PostTag();
+			postTag.setPostId(postId);
+			postTag.setTagId(tagId);
+			postTagDao.insertPostTag(postTag);
 		}
-
+		
+		// 遍历所有作者
+		List<Integer> authors = postCreateInfo.getAuthors();
+		for(int author : authors) {
+			if(null == userDao.findUserById(author)) {
+				continue;
+			}
+			PostUser postUser = new PostUser();
+			postUser.setPostId(postId);
+			postUser.setUserId(author);
+			postUserDao.insertPostUser(postUser);
+		}
+		
 		return postId;
 	}
 

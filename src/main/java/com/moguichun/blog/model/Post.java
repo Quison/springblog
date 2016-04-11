@@ -9,10 +9,11 @@ public class Post {
 	private Integer id;
 	private String title;
 	private String content;
-	
+	private String renderContent;
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createDate;
-	
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updateDate;
 
@@ -40,6 +41,14 @@ public class Post {
 		this.content = content;
 	}
 
+	public String getRenderContent() {
+		return renderContent;
+	}
+
+	public void setRenderContent(String renderContent) {
+		this.renderContent = renderContent;
+	}
+
 	public Date getCreateDate() {
 		return createDate;
 	}
@@ -58,7 +67,8 @@ public class Post {
 
 	@Override
 	public String toString() {
-		return "Posts [id=" + id + ", title=" + title + ", content=" + content + ", createDate=" + createDate
-				+ ", updateDate=" + updateDate + "]";
+		return "Post [id=" + id + ", title=" + title + ", content=" + content + ", renderContent=" + renderContent
+				+ ", createDate=" + createDate + ", updateDate=" + updateDate + "]";
 	}
+
 }
