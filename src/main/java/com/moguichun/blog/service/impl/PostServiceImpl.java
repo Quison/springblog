@@ -24,26 +24,28 @@ import com.moguichun.blog.model.User;
 import com.moguichun.blog.service.PostService;
 
 @Service("PostService")
+@Transactional
 public class PostServiceImpl implements PostService {
 
 	@Autowired
 	private TagDao tagDao;
-	
+
 	@Autowired
 	private PostDao postDao;
-	
+
 	@Autowired
 	private PostDetailDao postDetailDao;
-	
+
 	@Autowired
 	private PostTagDao postTagDao;
-	
+
 	@Autowired
 	private UserDao userDao;
-	
+
 	@Autowired
 	private PostUserDao postUserDao;
 
+	
 	@Override
 	public PostDetailVo getPostDetailById(Integer id) {
 		return postDetailDao.getPostDetailById(id);
@@ -57,24 +59,49 @@ public class PostServiceImpl implements PostService {
 		}
 		return postDetailVos;
 	}
-	
 
 	@Override
 	public Integer createPost(PostCreateInfo postCreateInfo) {
+		Post post = insertPost(postCreateInfo);
+		int postId = post.getId();
+		insertTags(postId, postCreateInfo.getTags());
+		insertAuthors(postId, postCreateInfo.getAuthors());
+		return postId;
+	}
+
+	private Post insertPost(PostCreateInfo postCreateInfo) {
 		Post post = new Post();
 		post.setTitle(postCreateInfo.getTitle());
 		post.setContent(postCreateInfo.getContent());
-		
-		// 渲染
 		PegDownProcessor pegDownProcessor = new PegDownProcessor(Extensions.ALL);
 		String renderContent = pegDownProcessor.markdownToHtml(postCreateInfo.getContent());
 		post.setRenderContent(renderContent);
-		
 		postDao.insertPost(post);
-		int postId = post.getId();
+		return post;
+	}
 
-		// 遍历所有标签，标签已存在，那么直接插入past_tag表中，否则生成在插入
-		List<String> tagNames = postCreateInfo.getTags();
+	private void insertAuthors(int postId, List<Integer> authors) {
+		for (int author : authors) {
+			if (null == userDao.findUserById(author)) {
+				continue;
+			}
+			PostUser postUser = new PostUser();
+			postUser.setPostId(postId);
+			postUser.setUserId(author);
+			postUserDao.insertPostUser(postUser);
+		}
+	}
+
+	/**
+	 * 
+	 * @Title: insertTags
+	 * @Description: 遍历插入标签 
+	 * @param postId
+	 * @param tagNames
+     * @return void 
+     * @throws
+	 */
+	private void insertTags(int postId, List<String> tagNames) {
 		for (String tagName : tagNames) {
 			int tagId = tagDao.findTagIdByTagName(tagName);
 			if (tagId == 0) {
@@ -88,20 +115,6 @@ public class PostServiceImpl implements PostService {
 			postTag.setTagId(tagId);
 			postTagDao.insertPostTag(postTag);
 		}
-		
-		// 遍历所有作者
-		List<Integer> authors = postCreateInfo.getAuthors();
-		for(int author : authors) {
-			if(null == userDao.findUserById(author)) {
-				continue;
-			}
-			PostUser postUser = new PostUser();
-			postUser.setPostId(postId);
-			postUser.setUserId(author);
-			postUserDao.insertPostUser(postUser);
-		}
-		
-		return postId;
 	}
 
 	@Override

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.moguichun.blog.dao.TagDetailDao">
+
+	<select id="getAllTagDetail" resultType="TagDetailVo">
+		SELECT tag.id tagId, tag.tag_name, COUNT(tag.id) postCountOfTag FROM tag, post_tag WHERE tag.id = post_tag.tag_id GROUP BY tag.id
+	</select>
+	
+</mapper>

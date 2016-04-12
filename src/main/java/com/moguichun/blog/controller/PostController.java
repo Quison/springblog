@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.moguichun.blog.model.PostDetailVo;
 import com.moguichun.blog.service.PostService;
 
-import groovy.lang.MetaClassImpl.Index;
 
 @Controller
 @EnableAutoConfiguration
@@ -29,7 +27,7 @@ public class PostController {
 	@RequestMapping(value="/")
 	public String index(Model model) {
 		// 首页显示5篇文章
-		List<PostDetailVo> postDetailVos = postService.getPostDetailByPaging(0, 3);
+		List<PostDetailVo> postDetailVos = postService.getPostDetailByPaging(0, 5);
 		int postCount = postService.getPostCount();
 		model.addAttribute("postDetailVos",postDetailVos);
 		model.addAttribute("postCount", postCount);

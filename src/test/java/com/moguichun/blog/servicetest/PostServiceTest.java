@@ -54,10 +54,9 @@ public class PostServiceTest {
 		List<String> tags = new ArrayList<>();
 		tags.add("创建文章分类3");
 		tags.add("创建文章分类4");
-		tags.add("Exception");
 		postCreateInfo.setTags(tags);
 		
-		postCreateInfo.setTitle("创建文章测试标题");
+		postCreateInfo.setTitle("创建文章函数全重构后测试标题");
 		postCreateInfo.setContent("测试创建文章的内容等等的那里睡大觉发牢骚的开发就爱上");
 		
 		int postId = postService.createPost(postCreateInfo);

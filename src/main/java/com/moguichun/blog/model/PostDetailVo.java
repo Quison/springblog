@@ -12,6 +12,7 @@ public class PostDetailVo {
 	private List<String> tags;
 	private List<String> authors;
 	private String content;
+	private String renderContent;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createDate;
@@ -59,6 +60,14 @@ public class PostDetailVo {
 		this.content = content;
 	}
 
+	public String getRenderContent() {
+		return renderContent;
+	}
+
+	public void setRenderContent(String renderContent) {
+		this.renderContent = renderContent;
+	}
+
 	public Date getCreateDate() {
 		return createDate;
 	}
@@ -77,8 +86,9 @@ public class PostDetailVo {
 
 	@Override
 	public String toString() {
-		return "PostInfoVo [id=" + id + ", title=" + title + ", tags=" + tags + ", authors=" + authors + ", content="
-				+ content + ", createDate=" + createDate + ", updateDate=" + updateDate + "]";
+		return "PostDetailVo [id=" + id + ", title=" + title + ", tags=" + tags + ", authors=" + authors + ", content="
+				+ content + ", renderContent=" + renderContent + ", createDate=" + createDate + ", updateDate="
+				+ updateDate + "]";
 	}
 
 }

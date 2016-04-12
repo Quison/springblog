@@ -2,40 +2,10 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>个人博客--后台管理</title>
-    <link rel="stylesheet" href="../../static/css/bootstrap.min.css" />
-    <style>
-        body {
-            margin-top: 50px;
-            background-color: #dbdcde;
-        }
-        .col-md-2 {
-            margin-left: 50px;
-
-            background-color: #edeef3;
-        }
-
-        .col-md-9 {
-            margin-left: 20px;
-            background-color: snow;
-        }
-        .editor {
-            background-color: #adadad;
-        }
-        .preview {
-            background-color: #1fdfda;
-        }
-
-        .blog-footer {
-            margin-top: 15px;
-            padding: 40px 0;
-            color: #999;
-            text-align: center;
-            background-color: #f9f9f9;
-            border-top: 1px solid #e5e5e5;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/manager.css" />
 </head>
 
 <body>
@@ -43,7 +13,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <a href="#" class="navbar-brand">莫贵淳的个人博客</a>
+                <a href="#" class="navbar-brand">后台管理</a>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -66,27 +36,35 @@
         </div>
     </nav>
     <div class="container-fluid">
-        <hr/>
         <div class="row">
             <div class="col-md-2 manager-side">
                 <ul class="nav nav-stacked">
-                    <li role="presentation" class="active"><a href="#">创建新的文章</a></li>
-                    <li role="presentation" ><a href="#">标签归类文章</a></li>
-                    <li role="presentation" ><a href="#">时间排列文章</a></li>
+                    <li role="presentation"><a href="#" id="createNewPost">创建新的文章</a></li>
+                    <li role="presentation">
+                        <a href="#" id="getTagDetails">标签归类文章</a>
+                        <ul id="tagDetails"></ul>
+                    </li>
+                    <li role="presentation"><a href="#">时间排列文章</a></li>
                 </ul>
             </div>
             <div class="col-md-9 manager-main">
-                <div class="row main-heading">
+                <div class="row">
                     <div class="col-md-6 editor">
-                        <h5 class="h5 text-center">编辑区</h2>
-                        <iframe src="ace.html" width="100%" height="720px"></iframe>
+                        <div class="editor-title">
+                            <h5 class="h5 text-center">编辑区</h5>
+                        </div>
+                        <div id="editor"></div>
                     </div>
                     <div class="col-md-6 preview">
-                        <h5 class="h5 text-center">预览区</h2>
+                        <div class="editor-title">
+                            <h5 class="h5 text-center">预览区</h5>
+                        </div>
+                        <div id="preview"></div>
                     </div>
                 </div>
-                <div class="main-footer">
-                    <input type="button" value="完成"/>
+                <div class="main-footer text-center">
+                    <input type="button" class="btn btn-primary" id="createDone" value="完成"/>
+                    <input type="hidden" id="postId" value="0" />
                 </div>
             </div>
         </div>
@@ -95,6 +73,12 @@
     <footer class="blog-footer">
         <p>Blog build by moguichun</p>
     </footer>
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="https://ace.c9.io/build/src/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/marked.js"></script>
+    <script src="/js/manager.js"></script>
 </body>
 
 </html>
