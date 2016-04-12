@@ -22,19 +22,13 @@ $("#getTagDetails").click(function() {
     var getTagDetails = $.ajax('/manager/getAllTagDetail', {
         dataType: 'json'
     }).done(function(data) {
-        dealWithTagDetails(data);
+    	var ul = $("#tagDetails");
+    	$.each(data.tagDetails, function(i, item){
+            ul.append('<li><a href="#">' + item.tagName + '(' + item.postCountOfTag + ')</a></li>');
+    	});
+    	
     }).fail(function(xhr, status) {
         alert("失败！" + xhr.status);
     });
 })
 
-function dealWithTagDetails(data) {
-    alert("处理函数");
-    var tagDetails = JSON.parse(data).tagDetails;
-
-     for(var tagDetail in tagDetails) {
-         console.log(tagDetail);
-//         var ul = $("#tagDetails");
-//         ul.append('<li><a href="#">' + tagDetail.tagName + "(" + tagDetail.postCountOfTag + ")</a></li>");
-     }
-}

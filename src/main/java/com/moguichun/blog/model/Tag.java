@@ -49,7 +49,7 @@ public class Tag {
 
 	@Override
 	public String toString() {
-		return "Tag [id=" + id + ", tagName=" + tagName + ", createDate=" + createDate + ", updateDate=" + updateDate
+		return "[id=" + id + ", tagName=" + tagName + ", createDate=" + createDate + ", updateDate=" + updateDate
 				+ "]";
 	}
 

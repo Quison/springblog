@@ -86,7 +86,7 @@ public class PostDetailVo {
 
 	@Override
 	public String toString() {
-		return "PostDetailVo [id=" + id + ", title=" + title + ", tags=" + tags + ", authors=" + authors + ", content="
+		return "[id=" + id + ", title=" + title + ", tags=" + tags + ", authors=" + authors + ", content="
 				+ content + ", renderContent=" + renderContent + ", createDate=" + createDate + ", updateDate="
 				+ updateDate + "]";
 	}

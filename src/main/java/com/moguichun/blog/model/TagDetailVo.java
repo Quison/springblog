@@ -32,7 +32,7 @@ public class TagDetailVo {
 
 	@Override
 	public String toString() {
-		return "TagDetailVo [tagId=" + tagId + ", tagName=" + tagName + ", postCountOfTag=" + postCountOfTag + "]";
+		return "[tagId=" + tagId + ", tagName=" + tagName + ", postCountOfTag=" + postCountOfTag + "]";
 	}
 
 }

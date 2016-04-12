@@ -58,7 +58,7 @@ public class PostTag {
 
 	@Override
 	public String toString() {
-		return "PostTag [id=" + id + ", postId=" + postId + ", tagId=" + tagId + ", createDate=" + createDate
+		return "[id=" + id + ", postId=" + postId + ", tagId=" + tagId + ", createDate=" + createDate
 				+ ", updateDate=" + updateDate + "]";
 	}
 

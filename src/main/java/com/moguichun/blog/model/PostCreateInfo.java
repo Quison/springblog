@@ -52,7 +52,7 @@ public class PostCreateInfo {
 
 	@Override
 	public String toString() {
-		return "PostCreateInfo [title=" + title + ", content=" + content + ", renderContent=" + renderContent
+		return "[title=" + title + ", content=" + content + ", renderContent=" + renderContent
 				+ ", tags=" + tags + ", authors=" + authors + "]";
 	}
 
