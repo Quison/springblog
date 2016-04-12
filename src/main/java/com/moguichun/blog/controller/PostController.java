@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.moguichun.blog.model.PostDetailVo;
+import com.moguichun.blog.service.ManagerService;
 import com.moguichun.blog.service.PostService;
 
 
@@ -24,6 +25,10 @@ public class PostController {
 	@Qualifier("PostService")
 	private PostService postService;
 	
+	@Autowired
+	@Qualifier("ManagerService")
+	private ManagerService managerService;
+	
 	@RequestMapping(value="/")
 	public String index(Model model) {
 		// 首页显示5篇文章
@@ -31,6 +36,7 @@ public class PostController {
 		int postCount = postService.getPostCount();
 		model.addAttribute("postDetailVos",postDetailVos);
 		model.addAttribute("postCount", postCount);
+		model.addAttribute("tagDetails", managerService.getAllTagDetail());
 		return "home/index";
 	}
 

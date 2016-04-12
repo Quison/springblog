@@ -9,6 +9,18 @@ $(function() {
     $("#editor").bind("DOMSubtreeModified", function(){
         $("#preview").html(marked(editor.getValue()));
     });
+
+    var getTagDetails = $.ajax('/manager/getAllTagDetail', {
+        dataType: 'json'
+    }).done(function(data) {
+        var ul = $("#tagDetails");
+        $.each(data.tagDetails, function(i, item){
+            ul.append('<li><a href="#">' + item.tagName + '(' + item.postCountOfTag + ')</a></li>');
+        });
+        
+    }).fail(function(xhr, status) {
+        alert("失败！" + xhr.status);
+    });
 });
 
 // 创建新的文章
@@ -19,16 +31,6 @@ $("#createNewPost").click(function() {
 
 // 获取标签细节
 $("#getTagDetails").click(function() {
-    var getTagDetails = $.ajax('/manager/getAllTagDetail', {
-        dataType: 'json'
-    }).done(function(data) {
-    	var ul = $("#tagDetails");
-    	$.each(data.tagDetails, function(i, item){
-            ul.append('<li><a href="#">' + item.tagName + '(' + item.postCountOfTag + ')</a></li>');
-    	});
-    	
-    }).fail(function(xhr, status) {
-        alert("失败！" + xhr.status);
-    });
-})
+    $("#tagDetails").toggle();
+});
 

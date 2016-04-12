@@ -54,7 +54,7 @@
                         <p>
                             <small>作者: </small>
                             <small th:each="author : ${postDetailVo.authors}" th:text = "${author} "></small>
-                            <small th:text="' 发布于' + ${#dates.format(postDetailVo.createDate)}"></small>
+                            <small th:text="' 发布于' + ${#dates.format(postDetailVo.createDate, 'yyyy-MM-dd')}"></small>
                         </p>
                         <div class="post-tags" >
                             <p th:each="tag : ${postDetailVo.tags}"><mark class="label label-primary" th:text="${tag}"></mark></p>
@@ -82,10 +82,7 @@
                 </div>
                 <div class="sidebar-module sidebar-module-inset sidebar-tags">
                     <h4>文章分类</h4>
-                    <p>Java(10)</p>
-                    <p>JenKins(12)</p>
-                    <p>Python(11)</p>
-                    <p>Groovy(20)</p>
+                    <a href="#"><p th:each="tagDetail : ${tagDetails}" th:text="${tagDetail.tagName} + '(' + ${tagDetail.postCountOfTag} + ')'"></p></a>
                 </div>
                 <div class="sidebar-module sidebar-module-inset sidebar-archives">
                     <h4>文章归档</h4>
