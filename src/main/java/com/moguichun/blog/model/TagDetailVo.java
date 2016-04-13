@@ -1,10 +1,13 @@
 package com.moguichun.blog.model;
 
+import java.util.List;
+
 public class TagDetailVo {
 
 	private Integer tagId;
 	private String tagName;
 	private Integer postCountOfTag;
+	private List<Post> postsOfTag;
 
 	public Integer getTagId() {
 		return tagId;
@@ -30,9 +33,18 @@ public class TagDetailVo {
 		this.postCountOfTag = postCountOfTag;
 	}
 
+	public List<Post> getPostsOfTag() {
+		return postsOfTag;
+	}
+
+	public void setPostsOfTag(List<Post> postsOfTag) {
+		this.postsOfTag = postsOfTag;
+	}
+
 	@Override
 	public String toString() {
-		return "[tagId=" + tagId + ", tagName=" + tagName + ", postCountOfTag=" + postCountOfTag + "]";
+		return "TagDetailVo [tagId=" + tagId + ", tagName=" + tagName + ", postCountOfTag=" + postCountOfTag
+				+ ", postsOfTag=" + postsOfTag + "]";
 	}
 
 }

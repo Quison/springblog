@@ -6,8 +6,19 @@
 
 <mapper namespace="com.moguichun.blog.dao.TagDetailDao">
 
-	<select id="getAllTagDetail" resultType="TagDetailVo">
-		SELECT tag.id tagId, tag.tag_name, COUNT(tag.id) postCountOfTag FROM tag, post_tag WHERE tag.id = post_tag.tag_id GROUP BY tag.id
+	<resultMap type="TagDetailVo" id="TagDetailVoMap">
+		<id property="tagId" column="tagId" />
+		<result property="tagName" column="tagName"/>
+		<result property="postCountOfTag" column="postCountOfTag"/>
+		<collection property="postsOfTag" ofType="Post" column="tagId" select="findPostsOfTag"></collection>
+	</resultMap>
+
+	<select id="getAllTagDetail" resultMap="TagDetailVoMap">
+		SELECT tag.id tagId, tag_name, COUNT(tag.id) postCountOfTag FROM tag, post_tag WHERE tag.id = post_tag.tag_id GROUP BY tag.id
+	</select>
+	
+	<select id="findPostsOfTag" parameterType="Integer" resultType="Post">
+		SELECT post.id, title, content FROM post, post_tag WHERE post.id = post_tag.post_id AND post_tag.tag_id = #{tagId}
 	</select>
 	
 </mapper>

@@ -47,6 +47,9 @@
                         <ul id="tagDetails" style="display:none;" >
                             <li th:each="tagDetail : ${tagDetails}">
                                 <a href="#" th:text="${tagDetail.tagName} + '(' + ${tagDetail.postCountOfTag} + ')'">分类详情</a>
+                                <ul>
+                                    <li th:each="post : ${tagDetail.postsOfTag}"><a href="#" th:text="${post.title}">文章标题</a></li>
+                                </ul>
                             </li>
                         </ul>
                     </li>
