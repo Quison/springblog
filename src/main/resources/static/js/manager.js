@@ -9,23 +9,11 @@ $(function() {
     $("#editor").bind("DOMSubtreeModified", function(){
         $("#preview").html(marked(editor.getValue()));
     });
-
-    var getTagDetails = $.ajax('/manager/getAllTagDetail', {
-        dataType: 'json'
-    }).done(function(data) {
-        var ul = $("#tagDetails");
-        $.each(data.tagDetails, function(i, item){
-            ul.append('<li><a href="#">' + item.tagName + '(' + item.postCountOfTag + ')</a></li>');
-        });
-        
-    }).fail(function(xhr, status) {
-        alert("失败！" + xhr.status);
-    });
 });
 
 // 创建新的文章
-$("#createNewPost").click(function() {
-    editor.setValue("# 请输入标题...\r\ntags : 输入标签... \r\n\r\n---\r\n\r\n");
+$("#newPost").click(function() {
+    editor.setValue("# 请输入标题...\r\n<mark class=\"label label-primary\">标签</mark>\r\n\r\n---\r\n\r\n");
     $("#postId").val(0);
 });
 
@@ -34,3 +22,31 @@ $("#getTagDetails").click(function() {
     $("#tagDetails").toggle();
 });
 
+$("#getPostArchives").click(function() {
+    $("#postArchives").toggle();
+});
+
+$("#createPost").click(function() {
+	var preview = $("#preview");
+	var title = preview.find('h1').html();
+    var tags = [];
+    preview.find('mark').each(function(){
+    	tags.push($(this).html());
+    });
+    var authors = [1,2];
+    var content = editor.getValue();
+    var renderContent = preview.html();
+    
+    var postCreateInfo = {
+    	"title": title,
+    	"content": content,
+    	"renderContent": renderContent,
+    	"tags": tags,
+    	"authors": authors
+    };
+    
+    $.ajaxSettings.traditional = true;
+    
+    $.post("/post/create", postCreateInfo);
+    
+});

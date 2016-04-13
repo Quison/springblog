@@ -1,28 +1,44 @@
 body {
-    margin-top: 70px;
+    background-color: #dbdcde;
 }
 p {
     text-indent: 2em;
 }
+
 .sidebar-about-me {
-    background-color: #dfddfd;
+	margin-top:20%;
+    background-color: #fffffa;
+    border-radius: 5px;
     padding: 10px;
 }
 .sidebar-tags {
     margin-top: 10px;
-    background-color: #dfedfe;
+    background-color: #fffffa;
+    border-radius: 5px;
     padding: 10px;
 }
 .sidebar-archives {
     margin-top: 10px;
-    background-color: #afedfe;
+    border-radius: 5px;
+    background-color: #fffffa;
     padding: 10px;
 }
 .blog-footer {
-    margin-top: 15px;
-    padding: 40px 0;
+    margin-top: 1px;
+    padding: 10px 0;
     color: #999;
     text-align: center;
-    background-color: #f9f9f9;
     border-top: 1px solid #e5e5e5;
+}
+
+.blog-post {
+    background-color: #fffffa;
+    border-radius: 5px;
+    margin-bottom:20px;
+    padding: 20px 20px;
+    overflow-y: scroll;
+}
+
+article img{
+    width: 100%;
 }

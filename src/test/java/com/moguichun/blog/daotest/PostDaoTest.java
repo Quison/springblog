@@ -6,8 +6,6 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.verification.VerificationAfterDelay;
-import org.pegdown.PegDownProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -16,6 +14,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.moguichun.blog.Application;
 import com.moguichun.blog.dao.PostDao;
 import com.moguichun.blog.model.Post;
+import com.moguichun.blog.model.PostArchiveVo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
@@ -63,5 +62,11 @@ public class PostDaoTest {
 		int count = postDao.queryPostCount();
 		System.out.println("count =========== " + count);
 		assertTrue((count > 0) );
+	}
+	
+	@Test
+	public void testGetPostArchives() {
+		List<PostArchiveVo> postArchiveVos = postDao.getPostArchives();
+		System.out.println(postArchiveVos.toString());
 	}
 }

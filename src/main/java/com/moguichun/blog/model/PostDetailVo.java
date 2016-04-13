@@ -10,7 +10,6 @@ public class PostDetailVo {
 	private Integer id;
 	private String title;
 	private List<String> tags;
-	private List<String> authors;
 	private String content;
 	private String renderContent;
 
@@ -42,14 +41,6 @@ public class PostDetailVo {
 
 	public void setTags(List<String> tags) {
 		this.tags = tags;
-	}
-
-	public List<String> getAuthors() {
-		return authors;
-	}
-
-	public void setAuthors(List<String> authors) {
-		this.authors = authors;
 	}
 
 	public String getContent() {
@@ -86,9 +77,9 @@ public class PostDetailVo {
 
 	@Override
 	public String toString() {
-		return "[id=" + id + ", title=" + title + ", tags=" + tags + ", authors=" + authors + ", content="
-				+ content + ", renderContent=" + renderContent + ", createDate=" + createDate + ", updateDate="
-				+ updateDate + "]";
+		return "PostDetailVo [id=" + id + ", title=" + title + ", tags=" + tags + ", content=" + content
+				+ ", renderContent=" + renderContent + ", createDate=" + createDate + ", updateDate=" + updateDate
+				+ "]";
 	}
 
 }

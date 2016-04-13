@@ -41,5 +41,9 @@
 	<select id="queryPostCount" resultType="Integer">
 		SELECT COUNT(*) FROM post
 	</select>
+	
+	<select id="getPostArchives" resultType="PostArchiveVo">
+		SELECT create_date,  count(create_date) postCount FROM post GROUP BY date_format(create_date, '%Y-%M')
+	</select>
 
 </mapper>

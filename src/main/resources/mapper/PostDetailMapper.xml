@@ -7,7 +7,7 @@
 <mapper namespace="com.moguichun.blog.dao.PostDetailDao">
 
 	<select id="getPostDetailByPaging" resultMap="PostDetailMap">
-		SELECT id, title, render_content, create_date, update_date FROM post LIMIT #{0},#{1}
+		SELECT id, title, render_content, create_date, update_date FROM post ORDER BY create_date DESC LIMIT #{0},#{1} 
 	</select>
 	
 	<select id="getPostDetailById" parameterType="Integer" resultMap="PostDetailMap">
@@ -21,17 +21,11 @@
 		<result property="createDate" column="create_date"/>
 		<result property="updateDate" column="update_date"/>
 		<collection property="tags" ofType="String" column="id" select="findTagsNameOfPost"></collection>
-		<collection property="authors" ofType="String" column="id" select="findAuthorsNameOfPost"></collection>
 	</resultMap>
 	
 	<select id="findTagsNameOfPost" parameterType="Integer"  resultType="String">
 		SELECT DISTINCT tag_name FROM post_tag, tag 
 		WHERE post_tag.post_id = #{id} AND post_tag.tag_id = tag.id
-	</select>
-	
-	<select id="findAuthorsNameOfPost" parameterType="Integer" resultType="String">
-		SELECT DISTINCT username FROM post_user, user 
-		WHERE post_user.post_id = #{id} AND post_user.user_id = user.id
 	</select>
 
 </mapper>

@@ -49,7 +49,6 @@
 		<mapper resource="mapper/UserMapper.xml" />
 		<mapper resource="mapper/TagMapper.xml" />
 		<mapper resource="mapper/PostTagMapper.xml" />
-		<mapper resource="mapper/PostUserMapper.xml" />
 		<mapper resource="mapper/PostDetailMapper.xml" />
 		<mapper resource="mapper/TagDetailMapper.xml" />
 	</mappers>

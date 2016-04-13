@@ -2,19 +2,23 @@ body {
     margin-top: 50px;
     background-color: #dbdcde;
 }
-.col-md-2 {
+.manager-side {
     margin-left: 50px;
     margin-top: 55px;
     background-color: #edeef3;
     border-radius: 5px;
     list-style: none;
 }
-.col-md-9 {
+.manager-main {
     margin-left: 20px;
     margin-top: 20px;
     border-radius: 5px;
 }
-.col-md-6 {
+.editor {
+    height: 720px;
+}
+
+.preview {
     height: 720px;
 }
 
@@ -23,11 +27,10 @@ body {
 }
 
 .blog-footer {
-    margin-top: 15px;
-    padding: 40px 0;
+    margin-top: 10px;
+    padding: 10px 0;
     color: #999;
     text-align: center;
-    background-color: #f9f9f9;
     border-top: 1px solid #e5e5e5;
 }
 
@@ -46,3 +49,4 @@ body {
     background-color: snow;
     overflow-y: scroll;
 }
+

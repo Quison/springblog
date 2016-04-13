@@ -8,7 +8,6 @@ public class PostCreateInfo {
 	private String content;
 	private String renderContent;
 	private List<String> tags;
-	private List<Integer> authors;
 
 	public String getTitle() {
 		return title;
@@ -42,18 +41,10 @@ public class PostCreateInfo {
 		this.tags = tags;
 	}
 
-	public List<Integer> getAuthors() {
-		return authors;
-	}
-
-	public void setAuthors(List<Integer> authors) {
-		this.authors = authors;
-	}
-
 	@Override
 	public String toString() {
-		return "[title=" + title + ", content=" + content + ", renderContent=" + renderContent
-				+ ", tags=" + tags + ", authors=" + authors + "]";
+		return "PostCreateInfo [title=" + title + ", content=" + content + ", renderContent=" + renderContent
+				+ ", tags=" + tags + "]";
 	}
 
 }

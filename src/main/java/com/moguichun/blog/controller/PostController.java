@@ -2,6 +2,8 @@ package com.moguichun.blog.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.moguichun.blog.model.PostCreateInfo;
 import com.moguichun.blog.model.PostDetailVo;
 import com.moguichun.blog.service.ManagerService;
 import com.moguichun.blog.service.PostService;
@@ -37,6 +40,7 @@ public class PostController {
 		model.addAttribute("postDetailVos",postDetailVos);
 		model.addAttribute("postCount", postCount);
 		model.addAttribute("tagDetails", managerService.getAllTagDetail());
+		model.addAttribute("postArchives", postService.getPostArchives());
 		return "home/index";
 	}
 
@@ -67,9 +71,11 @@ public class PostController {
 	 * @return String   
 	 * @throws
 	 */
-	@RequestMapping(value="/post/create", method=RequestMethod.GET)
-	public String createPost() {
-		return "create";
+	@RequestMapping(value="/post/create", method=RequestMethod.POST)
+	public String createPost(PostCreateInfo postCreateInfo, HttpServletRequest request) {
+		System.out.println(postCreateInfo.toString());
+		int postId = postService.createPost(postCreateInfo);
+		return "/post/show/" + postId;
 	}
 
 }

@@ -49,7 +49,6 @@ public class PostServiceTest {
 		List<Integer> authors = new ArrayList<>();
 		authors.add(1);
 		authors.add(2);
-		postCreateInfo.setAuthors(authors);
 		
 		List<String> tags = new ArrayList<>();
 		tags.add("创建文章分类3");

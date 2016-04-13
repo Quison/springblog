@@ -11,14 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.moguichun.blog.dao.PostDao;
 import com.moguichun.blog.dao.PostDetailDao;
 import com.moguichun.blog.dao.PostTagDao;
-import com.moguichun.blog.dao.PostUserDao;
 import com.moguichun.blog.dao.TagDao;
 import com.moguichun.blog.dao.UserDao;
 import com.moguichun.blog.model.Post;
+import com.moguichun.blog.model.PostArchiveVo;
 import com.moguichun.blog.model.PostCreateInfo;
 import com.moguichun.blog.model.PostDetailVo;
 import com.moguichun.blog.model.PostTag;
-import com.moguichun.blog.model.PostUser;
 import com.moguichun.blog.model.Tag;
 import com.moguichun.blog.model.User;
 import com.moguichun.blog.service.PostService;
@@ -42,9 +41,6 @@ public class PostServiceImpl implements PostService {
 	@Autowired
 	private UserDao userDao;
 
-	@Autowired
-	private PostUserDao postUserDao;
-
 	
 	@Override
 	public PostDetailVo getPostDetailById(Integer id) {
@@ -65,7 +61,6 @@ public class PostServiceImpl implements PostService {
 		Post post = insertPost(postCreateInfo);
 		int postId = post.getId();
 		insertTags(postId, postCreateInfo.getTags());
-		insertAuthors(postId, postCreateInfo.getAuthors());
 		return postId;
 	}
 
@@ -73,23 +68,9 @@ public class PostServiceImpl implements PostService {
 		Post post = new Post();
 		post.setTitle(postCreateInfo.getTitle());
 		post.setContent(postCreateInfo.getContent());
-		PegDownProcessor pegDownProcessor = new PegDownProcessor(Extensions.ALL);
-		String renderContent = pegDownProcessor.markdownToHtml(postCreateInfo.getContent());
-		post.setRenderContent(renderContent);
+		post.setRenderContent(postCreateInfo.getRenderContent());
 		postDao.insertPost(post);
 		return post;
-	}
-
-	private void insertAuthors(int postId, List<Integer> authors) {
-		for (int author : authors) {
-			if (null == userDao.findUserById(author)) {
-				continue;
-			}
-			PostUser postUser = new PostUser();
-			postUser.setPostId(postId);
-			postUser.setUserId(author);
-			postUserDao.insertPostUser(postUser);
-		}
 	}
 
 	/**
@@ -120,6 +101,11 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public Integer getPostCount() {
 		return postDao.queryPostCount();
+	}
+
+	@Override
+	public List<PostArchiveVo> getPostArchives() {
+		return postDao.getPostArchives();
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.moguichun.blog.model.Post;
+import com.moguichun.blog.model.PostArchiveVo;
 
 @Repository
 public interface PostDao {
@@ -18,5 +19,7 @@ public interface PostDao {
 	public void updatePost(Post post);
 	
 	public Integer queryPostCount();
+	
+	public List<PostArchiveVo> getPostArchives();
 
 }
