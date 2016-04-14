@@ -12,6 +12,7 @@ import com.moguichun.blog.dao.PostDao;
 import com.moguichun.blog.dao.PostDetailDao;
 import com.moguichun.blog.dao.PostTagDao;
 import com.moguichun.blog.dao.TagDao;
+import com.moguichun.blog.dao.TagDetailDao;
 import com.moguichun.blog.dao.UserDao;
 import com.moguichun.blog.model.Post;
 import com.moguichun.blog.model.PostArchiveVo;
@@ -19,6 +20,7 @@ import com.moguichun.blog.model.PostCreateInfo;
 import com.moguichun.blog.model.PostDetailVo;
 import com.moguichun.blog.model.PostTag;
 import com.moguichun.blog.model.Tag;
+import com.moguichun.blog.model.TagDetailVo;
 import com.moguichun.blog.model.User;
 import com.moguichun.blog.service.PostService;
 
@@ -41,6 +43,8 @@ public class PostServiceImpl implements PostService {
 	@Autowired
 	private UserDao userDao;
 
+	@Autowired
+	private TagDetailDao tagDetailDao;
 	
 	@Override
 	public PostDetailVo getPostDetailById(Integer id) {
@@ -106,6 +110,11 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public List<PostArchiveVo> getPostArchives() {
 		return postDao.getPostArchives();
+	}
+	
+	@Override
+	public List<TagDetailVo> getAllTagDetail() {
+		return tagDetailDao.getAllTagDetail();
 	}
 
 }

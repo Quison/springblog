@@ -1,6 +1,9 @@
 package com.moguichun.blog.controller;
 
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.moguichun.blog.model.PostCreateInfo;
 import com.moguichun.blog.model.PostDetailVo;
-import com.moguichun.blog.service.ManagerService;
+import com.moguichun.blog.model.TagDetailVo;
 import com.moguichun.blog.service.PostService;
 
 
@@ -28,10 +31,6 @@ public class PostController {
 	@Qualifier("PostService")
 	private PostService postService;
 	
-	@Autowired
-	@Qualifier("ManagerService")
-	private ManagerService managerService;
-	
 	@RequestMapping(value="/")
 	public String index(Model model) {
 		// 首页显示5篇文章
@@ -39,7 +38,7 @@ public class PostController {
 		int postCount = postService.getPostCount();
 		model.addAttribute("postDetailVos",postDetailVos);
 		model.addAttribute("postCount", postCount);
-		model.addAttribute("tagDetails", managerService.getAllTagDetail());
+		model.addAttribute("tagDetails", postService.getAllTagDetail());
 		model.addAttribute("postArchives", postService.getPostArchives());
 		return "home/index";
 	}
@@ -77,5 +76,5 @@ public class PostController {
 		int postId = postService.createPost(postCreateInfo);
 		return "/post/show/" + postId;
 	}
-
+	
 }

@@ -44,22 +44,9 @@
                     <li role="presentation"><a href="#" id="newPost">创建新的文章</a></li>
                     <li role="presentation">
                         <a href="#" id="getTagDetails" >标签归类文章</a>
-                        <ul id="tagDetails" style="display:none;" >
-                            <li th:each="tagDetail : ${tagDetails}">
-                                <a href="#" th:text="${tagDetail.tagName} + '(' + ${tagDetail.postCountOfTag} + ')'">分类详情</a>
-                                <ul>
-                                    <li th:each="post : ${tagDetail.postsOfTag}"><a href="#" th:text="${post.title}">文章标题</a></li>
-                                </ul>
-                            </li>
-                        </ul>
                     </li>
                     <li role="presentation">
                         <a href="#" id="getPostArchives">时间排列文章</a>
-                        <ul id="postArchives" style="display:none;">
-                            <li th:each="postArchive : ${postArchives}">
-                                <a href="#" th:text="${#dates.format(postArchive.createDate, 'yyyy年MM月')} + '(' + ${postArchive.postCount} + ')'">归档详情</a>
-                            </li>
-                        </ul>
                     </li>
                 </ul>
 

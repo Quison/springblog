@@ -60,4 +60,10 @@ public class UserDaoTest {
 		user.setEmail("admin@foxmail.com");
 		userDao.updateUser(user);
 	}
+	
+	@Test
+	public void testFindUserByUsername() {
+		User user = userDao.findUserByUsername("admin");
+		System.out.println(user.toString());
+	}
 }

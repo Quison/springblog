@@ -14,11 +14,12 @@
 	</resultMap>
 
 	<select id="getAllTagDetail" resultMap="TagDetailVoMap">
-		SELECT tag.id tagId, tag_name, COUNT(tag.id) postCountOfTag FROM tag, post_tag WHERE tag.id = post_tag.tag_id GROUP BY tag.id
+		SELECT tag.id tagId, tag_name, COUNT(tag.id) postCountOfTag 
+		FROM tag, post_tag WHERE tag.id = post_tag.tag_id GROUP BY tag.id
 	</select>
 	
 	<select id="findPostsOfTag" parameterType="Integer" resultType="Post">
-		SELECT post.id, title, content FROM post, post_tag WHERE post.id = post_tag.post_id AND post_tag.tag_id = #{tagId}
+		SELECT post.id, title FROM post, post_tag WHERE post.id = post_tag.post_id AND post_tag.tag_id = #{tagId}
 	</select>
 	
 </mapper>

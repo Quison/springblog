@@ -35,5 +35,9 @@
 		</set>
 		WHERE id = #{id, jdbcType=INTEGER}
 	</update>
+	
+	<select id="findUserByUsername" parameterType="String" resultType="User">
+		SELECT * FROM user WHERE username = #{username}
+	</select>
 
 </mapper>

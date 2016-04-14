@@ -20,6 +20,12 @@ $("#newPost").click(function() {
 // 获取标签细节
 $("#getTagDetails").click(function() {
     $("#tagDetails").toggle();
+    $("#tagDetails").children().remove();
+    $.ajax("/getTagDetails",{
+        dataType: 'json'
+    }).done(function(data) {
+        console.log(data);
+    });
 });
 
 $("#getPostArchives").click(function() {
@@ -33,20 +39,18 @@ $("#createPost").click(function() {
     preview.find('mark').each(function(){
     	tags.push($(this).html());
     });
-    var authors = [1,2];
     var content = editor.getValue();
     var renderContent = preview.html();
-    
+
     var postCreateInfo = {
     	"title": title,
     	"content": content,
     	"renderContent": renderContent,
     	"tags": tags,
-    	"authors": authors
     };
-    
+
     $.ajaxSettings.traditional = true;
-    
+
     $.post("/post/create", postCreateInfo);
-    
+
 });
