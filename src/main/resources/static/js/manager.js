@@ -19,12 +19,27 @@ $("#newPost").click(function() {
 
 // 获取标签细节
 $("#getTagDetails").click(function() {
-    $("#tagDetails").toggle();
-    $("#tagDetails").children().remove();
+    var getTagDetails = $("#getTagDetails");
+
     $.ajax("/getTagDetails",{
         dataType: 'json'
     }).done(function(data) {
-        console.log(data);
+        var tagDetails = data.tagDetails;
+        $("#tags").children().remove();
+        getTagDetails.after('<ul id="tags"></ul>');
+        var tags = $("#tags");
+        $.each(tagDetails,function(i, item) {
+            console.log(item);
+            tags.append('<li id="li' + i + '"><a href="#" >' + item.tagName + '(' + item.postCountOfTag + ')</a></li>');
+        });
+
+        for(var i=0; i<tagDetails.length; i++) {
+            $("#li"+i).append('<ul id="tag'+i+'"></ul>');
+            var posts = tagDetails[i].postsOfTag;
+            for(var key in posts){
+                $("#tag"+i).append('<li><a href="#" >' + posts[key].title + '</a></li>');
+            }
+        }
     });
 });
 

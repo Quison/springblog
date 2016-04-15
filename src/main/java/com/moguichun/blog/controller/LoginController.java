@@ -22,7 +22,7 @@ public class LoginController {
 	@Qualifier("UserService")
 	private UserService userService;
 	
-	@RequestMapping(value="/manager/login")
+	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String loginPage() {
 		return "manager/login";
 	}

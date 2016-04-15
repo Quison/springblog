@@ -41,9 +41,6 @@ public class PostServiceImpl implements PostService {
 	private PostTagDao postTagDao;
 
 	@Autowired
-	private UserDao userDao;
-
-	@Autowired
 	private TagDetailDao tagDetailDao;
 	
 	@Override

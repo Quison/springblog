@@ -2,8 +2,11 @@ package com.moguichun.blog.model;
 
 import java.util.List;
 
-public class TagDetailVo {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
+public class TagDetailVo {
+	
 	private Integer tagId;
 	private String tagName;
 	private Integer postCountOfTag;

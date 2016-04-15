@@ -1,5 +1,6 @@
 package com.moguichun.blog.controller;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -75,6 +76,25 @@ public class PostController {
 		System.out.println(postCreateInfo.toString());
 		int postId = postService.createPost(postCreateInfo);
 		return "/post/show/" + postId;
+	}
+	
+	@RequestMapping("/getTagDetails")
+	@ResponseBody
+	public HashMap<String, Object> getTagDetails() {
+		
+		List<TagDetailVo> tagDetails = postService.getAllTagDetail();
+		HashMap<String, Object> map = new HashMap<>();
+		
+		
+		
+		List<String> strings = new ArrayList<>();
+		strings.add("asdfas");
+		strings.add("asdfss");
+		
+		map.put("tagDetails", tagDetails);
+		
+		return map;
+		
 	}
 	
 }

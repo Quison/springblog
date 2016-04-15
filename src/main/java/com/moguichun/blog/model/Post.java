@@ -3,7 +3,7 @@ package com.moguichun.blog.model;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
+    
 public class Post {
 
 	private Integer id;

@@ -19,7 +19,7 @@
 	</select>
 	
 	<select id="findPostsOfTag" parameterType="Integer" resultType="Post">
-		SELECT post.id, title FROM post, post_tag WHERE post.id = post_tag.post_id AND post_tag.tag_id = #{tagId}
+		SELECT DISTINCT post.id, title, post.create_date FROM post, post_tag WHERE post.id = post_tag.post_id AND post_tag.tag_id = #{tagId}
 	</select>
 	
 </mapper>

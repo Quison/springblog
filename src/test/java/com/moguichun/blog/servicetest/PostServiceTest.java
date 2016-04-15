@@ -16,6 +16,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.moguichun.blog.Application;
 import com.moguichun.blog.model.PostCreateInfo;
 import com.moguichun.blog.model.PostDetailVo;
+import com.moguichun.blog.model.TagDetailVo;
 import com.moguichun.blog.service.PostService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -60,5 +61,11 @@ public class PostServiceTest {
 		
 		int postId = postService.createPost(postCreateInfo);
 		System.out.println("id ========= " + postId);
+	}
+	
+	@Test
+	public void testGetAllTagDetail() {
+		List<TagDetailVo> tagDetails = postService.getAllTagDetail();
+		System.out.println(tagDetails.toString());
 	}
 }
