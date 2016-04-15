@@ -84,13 +84,6 @@ public class PostController {
 		
 		List<TagDetailVo> tagDetails = postService.getAllTagDetail();
 		HashMap<String, Object> map = new HashMap<>();
-		
-		
-		
-		List<String> strings = new ArrayList<>();
-		strings.add("asdfas");
-		strings.add("asdfss");
-		
 		map.put("tagDetails", tagDetails);
 		
 		return map;
